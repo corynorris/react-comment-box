@@ -1,0 +1,32 @@
+ @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+h1 {
+	font-size: 28px;
+	font-weight: 1000;
+	background: darken($brand-primary, 15%);
+	color: white;
+	border-radius: 30px;
+	text-align:center;
+	padding: 10px 20px;
+}
+.commentList {
+	border-bottom: 1px solid #CFCFCF;
+	padding: 10px 20px 10px 20px;
+	margin-bottom: 20px;
+
+	h2 {
+		font-size: 20px;
+		padding: 0px;
+		margin: 0px;
+	}
+	p {
+		padding-left: 20px;
+		font-size:16px;
+	}
+	.comment {
+		padding-left: 10px;
+		border-left: 6px solid $brand-primary;
+		border-bottom: 1px solid lighten($brand-primary, 30%);
+		margin: 10px 0px;
+	}
+}
