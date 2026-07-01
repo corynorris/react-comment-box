@@ -20,7 +20,7 @@ if (isDev) {
   console.log(`Server running in dev mode on http://localhost:${PORT}`);
 } else {
   // In production, serve the built frontend
-  const distPath = path.resolve(__dirname, "..", "dist");
+  const distPath = path.resolve(__dirname, "..");
   app.use(express.static(distPath));
 
   // SPA fallback — serve index.html for all non-API routes
