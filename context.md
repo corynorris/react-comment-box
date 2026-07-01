@@ -5,6 +5,7 @@
 A simple single-page comment box application. Users can see a list of comments and post new ones. Comments are saved to a database and displayed in real-time via polling (every 2 seconds). Comments support Markdown rendering (via the `marked` library with sanitization). There's also a basic auth system (login/register/password reset) scaffolded from Laravel defaults but **not wired into the comment functionality** — the comment API routes are completely public with no authentication middleware.
 
 **Key flows:**
+
 - **GET `/`** → serves `welcome.blade.php` which loads React frontend
 - **GET `/api/comments`** → returns JSON array of all comments
 - **POST `/api/comments`** → validates `name` (required, max:255) and `text` (required, unique), saves new comment, returns all comments
@@ -13,27 +14,30 @@ A simple single-page comment box application. Users can see a list of comments a
 ## 2. Tech Stack and Key Dependencies
 
 ### Backend (PHP)
-| Dependency | Version | Notes |
-|---|---|---|
-| PHP | >=5.5.9 | Very old minimum — PHP 5.5 EOL was July 2016 |
-| Laravel Framework | 5.1.* | EOL June 2018. Last release was 5.1.46 |
-| fzaninotto/faker | ~1.4 | For seeding/testing |
-| mockery/mockery | 0.9.* | For testing |
-| phpunit/phpunit | ~4.0 | Very old version |
-| phpspec/phpspec | ~2.1 | For spec testing |
+
+| Dependency        | Version | Notes                                        |
+| ----------------- | ------- | -------------------------------------------- |
+| PHP               | >=5.5.9 | Very old minimum — PHP 5.5 EOL was July 2016 |
+| Laravel Framework | 5.1.*   | EOL June 2018. Last release was 5.1.46       |
+| fzaninotto/faker  | ~1.4    | For seeding/testing                          |
+| mockery/mockery   | 0.9.*   | For testing                                  |
+| phpunit/phpunit   | ~4.0    | Very old version                             |
+| phpspec/phpspec   | ~2.1    | For spec testing                             |
 
 ### Frontend (JS/CSS)
-| Dependency | Version | Notes |
-|---|---|---|
-| React | 0.14.2 | **Loaded from CDN** in the Blade view, not from npm |
-| ReactDOM | 0.14.2 | Loaded from CDN |
-| jQuery | 2.1.3 | Loaded from CDN (used for AJAX) |
-| Marked | 0.3.2 | Loaded from CDN (Markdown parser) |
-| Bootstrap (Sass) | ^3.0.0 | Via npm — compiled with gulp |
-| Laravel Elixir | ^4.0.0 | Build tool (gulp wrapper) |
-| Gulp | ^3.8.8 | Build tool |
+
+| Dependency       | Version | Notes                                               |
+| ---------------- | ------- | --------------------------------------------------- |
+| React            | 0.14.2  | **Loaded from CDN** in the Blade view, not from npm |
+| ReactDOM         | 0.14.2  | Loaded from CDN                                     |
+| jQuery           | 2.1.3   | Loaded from CDN (used for AJAX)                     |
+| Marked           | 0.3.2   | Loaded from CDN (Markdown parser)                   |
+| Bootstrap (Sass) | ^3.0.0  | Via npm — compiled with gulp                        |
+| Laravel Elixir   | ^4.0.0  | Build tool (gulp wrapper)                           |
+| Gulp             | ^3.8.8  | Build tool                                          |
 
 ### Database
+
 - Defaults to **SQLite** (`database/database.sqlite`) — `config/database.php` line 18
 - Also configured for MySQL, PostgreSQL, SQL Server
 
@@ -112,6 +116,7 @@ react-comment-box/
 ## 4. How It's Built / Deployed
 
 ### Build pipeline
+
 1. **PHP dependencies:** `composer install` (not run — `vendor/` is empty)
 2. **Node dependencies:** `npm install` (not run — `node_modules/` is empty)
 3. **Frontend build:** `gulp` — runs `gulpfile.js` which:
@@ -121,6 +126,7 @@ react-comment-box/
 5. **Serve:** `php artisan serve` or `php -S localhost:8000 server.php` for development
 
 ### Deployment notes
+
 - `.env` file not committed — uses `.env.example` as template
 - `composer.json` has `post-root-package-install` hook to copy `.env.example` → `.env`
 - `post-create-project-cmd` runs `php artisan key:generate`

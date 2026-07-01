@@ -16,9 +16,7 @@ export default function App() {
       setComments(data);
       setError(null);
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Failed to load comments",
-      );
+      setError(err instanceof Error ? err.message : "Failed to load comments");
     } finally {
       setLoading(false);
     }

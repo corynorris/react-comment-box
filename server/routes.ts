@@ -15,7 +15,9 @@ router.get("/api/comments", (_req: Request, res: Response) => {
   try {
     const db = getDb();
     const comments = db
-      .prepare("SELECT id, name, text, created_at FROM comments ORDER BY created_at DESC")
+      .prepare(
+        "SELECT id, name, text, created_at FROM comments ORDER BY created_at DESC",
+      )
       .all() as Comment[];
     res.json(comments);
   } catch (err) {
@@ -34,7 +36,9 @@ router.post("/api/comments", (req: Request, res: Response) => {
       return res.status(400).json({ error: "Name is required" });
     }
     if (name.trim().length > 255) {
-      return res.status(400).json({ error: "Name must be 255 characters or less" });
+      return res
+        .status(400)
+        .json({ error: "Name must be 255 characters or less" });
     }
     if (!text || typeof text !== "string" || text.trim().length === 0) {
       return res.status(400).json({ error: "Comment text is required" });
