@@ -1,10 +1,8 @@
 import Database from "better-sqlite3";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DATA_DIR = path.resolve(__dirname, "..", "data");
+const DATA_DIR = process.env.COMMENT_DATA_DIR ?? path.resolve(process.cwd(), "data");
 const DB_PATH = path.join(DATA_DIR, "comments.db");
 
 let db: Database.Database;
