@@ -5,7 +5,7 @@ export interface Comment {
   created_at: string;
 }
 
-const BASE_URL = "/api/comments";
+const BASE_URL = `${import.meta.env.BASE_URL}api/comments`;
 
 export async function fetchComments(): Promise<Comment[]> {
   const res = await fetch(BASE_URL);
