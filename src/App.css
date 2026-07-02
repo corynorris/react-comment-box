@@ -1,149 +1,149 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
-  background: #f5f5f5;
-  color: #333;
+	margin: 0;
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+		Arial, sans-serif;
+	background: #f5f5f5;
+	color: #333;
 }
 
 .comment-box {
-  max-width: 640px;
-  margin: 40px auto;
-  padding: 0 20px;
+	max-width: 640px;
+	margin: 40px auto;
+	padding: 0 20px;
 }
 
 .comment-box > h1 {
-  font-size: 28px;
-  font-weight: 800;
-  background: #286090;
-  color: white;
-  border-radius: 30px;
-  text-align: center;
-  padding: 10px 20px;
-  margin: 0 0 30px;
+	font-size: 28px;
+	font-weight: 800;
+	background: #286090;
+	color: white;
+	border-radius: 30px;
+	text-align: center;
+	padding: 10px 20px;
+	margin: 0 0 30px;
 }
 
 /* --- Comment List --- */
 
 .comment-list {
-  border-bottom: 1px solid #cfcfcf;
-  padding: 10px 20px;
-  margin-bottom: 30px;
+	border-bottom: 1px solid #cfcfcf;
+	padding: 10px 20px;
+	margin-bottom: 30px;
 }
 
 .comment-list__status {
-  text-align: center;
-  padding: 30px 0;
-  color: #666;
-  font-style: italic;
+	text-align: center;
+	padding: 30px 0;
+	color: #666;
+	font-style: italic;
 }
 
 .comment-list__error {
-  color: #a94442;
-  background: #f2dede;
-  border-radius: 4px;
-  padding: 12px;
-  font-style: normal;
+	color: #a94442;
+	background: #f2dede;
+	border-radius: 4px;
+	padding: 12px;
+	font-style: normal;
 }
 
 .comment {
-  padding-left: 10px;
-  border-left: 6px solid #286090;
-  border-bottom: 1px solid #c4d8ec;
-  margin: 10px 0;
-  padding-bottom: 8px;
+	padding-left: 10px;
+	border-left: 6px solid #286090;
+	border-bottom: 1px solid #c4d8ec;
+	margin: 10px 0;
+	padding-bottom: 8px;
 }
 
 .comment:last-child {
-  border-bottom: none;
+	border-bottom: none;
 }
 
 .comment-author {
-  font-size: 20px;
-  padding: 0;
-  margin: 0 0 6px;
+	font-size: 20px;
+	padding: 0;
+	margin: 0 0 6px;
 }
 
 .comment-text {
-  padding-left: 20px;
-  font-size: 16px;
-  line-height: 1.5;
+	padding-left: 20px;
+	font-size: 16px;
+	line-height: 1.5;
 }
 
 .comment-text p {
-  margin: 4px 0;
+	margin: 4px 0;
 }
 
 /* --- Comment Form --- */
 
 .comment-form {
-  padding: 0 20px;
+	padding: 0 20px;
 }
 
 .form-group {
-  margin-bottom: 16px;
+	margin-bottom: 16px;
 }
 
 .form-group label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 4px;
-  font-size: 14px;
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+	font-size: 14px;
 }
 
 .form-control {
-  display: block;
-  width: 100%;
-  padding: 8px 12px;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #333;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: border-color 0.15s ease-in-out;
+	display: block;
+	width: 100%;
+	padding: 8px 12px;
+	font-size: 16px;
+	line-height: 1.5;
+	color: #333;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	transition: border-color 0.15s ease-in-out;
 }
 
 .form-control:focus {
-  border-color: #286090;
-  outline: 0;
-  box-shadow: 0 0 0 3px rgba(40, 96, 144, 0.2);
+	border-color: #286090;
+	outline: 0;
+	box-shadow: 0 0 0 3px rgba(40, 96, 144, 0.2);
 }
 
 textarea.form-control {
-  resize: vertical;
-  font-family: inherit;
+	resize: vertical;
+	font-family: inherit;
 }
 
 .btn {
-  display: inline-block;
-  padding: 8px 20px;
-  font-size: 16px;
-  font-weight: 600;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.15s ease-in-out;
+	display: inline-block;
+	padding: 8px 20px;
+	font-size: 16px;
+	font-weight: 600;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.15s ease-in-out;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #2e6da4;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: #286090;
+	background-color: #286090;
 }
 
 .btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+	opacity: 0.6;
+	cursor: not-allowed;
 }
