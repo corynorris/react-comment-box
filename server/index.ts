@@ -2,12 +2,18 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import routes from "./routes.js";
-import { closeDb } from "./db.js";
+import { migrate, closePool } from "./db.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 3000;
 const isDev = process.argv.includes("--dev");
+
+// Migrate DB schema on startup
+migrate().catch((err) => {
+  console.error("Failed to migrate database:", err);
+  process.exit(1);
+});
 
 // Parse JSON bodies
 app.use(express.json());
@@ -37,10 +43,10 @@ const server = app.listen(PORT, () => {
 
 // Clean shutdown
 process.on("SIGTERM", () => {
-  closeDb();
+  closePool();
   server.close();
 });
 process.on("SIGINT", () => {
-  closeDb();
+  closePool();
   server.close();
 });

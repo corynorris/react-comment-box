@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { getDb } from "./db.js";
+import { getPool } from "./db.js";
 
 const router = Router();
 
@@ -11,15 +11,13 @@ interface Comment {
 }
 
 // GET /api/comments — return all comments, newest first
-router.get("/api/comments", (_req: Request, res: Response) => {
+router.get("/api/comments", async (_req: Request, res: Response) => {
   try {
-    const db = getDb();
-    const comments = db
-      .prepare(
-        "SELECT id, name, text, created_at FROM comments ORDER BY created_at DESC",
-      )
-      .all() as Comment[];
-    res.json(comments);
+    const pool = getPool();
+    const result = await pool.query<Comment>(
+      "SELECT id, name, text, created_at FROM comments ORDER BY created_at DESC",
+    );
+    res.json(result.rows);
   } catch (err) {
     console.error("Error fetching comments:", err);
     res.status(500).json({ error: "Failed to fetch comments" });
@@ -27,7 +25,7 @@ router.get("/api/comments", (_req: Request, res: Response) => {
 });
 
 // POST /api/comments — validate and save a new comment
-router.post("/api/comments", (req: Request, res: Response) => {
+router.post("/api/comments", async (req: Request, res: Response) => {
   try {
     const { name, text } = req.body;
 
@@ -44,15 +42,13 @@ router.post("/api/comments", (req: Request, res: Response) => {
       return res.status(400).json({ error: "Comment text is required" });
     }
 
-    const db = getDb();
-    const stmt = db.prepare("INSERT INTO comments (name, text) VALUES (?, ?)");
-    const result = stmt.run(name.trim(), text.trim());
+    const pool = getPool();
+    const result = await pool.query<Comment>(
+      "INSERT INTO comments (name, text) VALUES ($1, $2) RETURNING id, name, text, created_at",
+      [name.trim(), text.trim()],
+    );
 
-    const comment = db
-      .prepare("SELECT id, name, text, created_at FROM comments WHERE id = ?")
-      .get(result.lastInsertRowid) as Comment;
-
-    res.status(201).json(comment);
+    res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error("Error creating comment:", err);
     res.status(500).json({ error: "Failed to create comment" });

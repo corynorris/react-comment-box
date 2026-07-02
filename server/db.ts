@@ -1,38 +1,28 @@
-import Database from "better-sqlite3";
-import fs from "fs";
-import path from "path";
+import pg from "pg";
 
-const DATA_DIR = process.env.COMMENT_DATA_DIR ?? path.resolve(process.cwd(), "data");
-const DB_PATH = path.join(DATA_DIR, "comments.db");
+const { Pool } = pg;
 
-let db: Database.Database;
+const pool = new Pool({
+  connectionString:
+    process.env.DATABASE_URL ||
+    "postgres://localhost:5432/comments",
+});
 
-export function getDb(): Database.Database {
-  if (!db) {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
-    }
-
-    db = new Database(DB_PATH);
-    db.pragma("journal_mode = WAL");
-    migrate(db);
-  }
-  return db;
+export function getPool(): pg.Pool {
+  return pool;
 }
 
-function migrate(db: Database.Database): void {
-  db.exec(`
+export async function migrate(): Promise<void> {
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS comments (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
       text TEXT NOT NULL,
-      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+      created_at TIMESTAMPTZ DEFAULT NOW()
     )
   `);
 }
 
-export function closeDb(): void {
-  if (db) {
-    db.close();
-  }
+export async function closePool(): Promise<void> {
+  await pool.end();
 }
