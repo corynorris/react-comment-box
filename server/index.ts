@@ -30,7 +30,9 @@ if (isDev) {
 	app.use(express.static(distPath));
 
 	// SPA fallback — serve index.html for all non-API routes
-	app.get("*", (_req, res) => {
+	// Express 5 removed the "*" string path pattern; pathless middleware is the
+	// supported SPA fallback.
+	app.use((_req, res) => {
 		res.sendFile(path.join(distPath, "index.html"));
 	});
 }
